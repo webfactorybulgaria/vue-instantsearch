@@ -3,9 +3,12 @@ import App from './App.vue';
 
 Vue.config.productionTip = false;
 
-export const createApp = () => {
+export const createApp = state => {
   const application = new Vue({
-    render: h => h(App),
+    render: h =>
+      h(App, {
+        props: state,
+      }),
   });
 
   return {

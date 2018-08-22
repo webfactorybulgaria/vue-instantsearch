@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ title }}</h1>
     <p>My first SSR App with Vue</p>
   </div>
 </template>
@@ -9,7 +9,8 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    title: String,
+    required: true,
   }
 }
 </script>

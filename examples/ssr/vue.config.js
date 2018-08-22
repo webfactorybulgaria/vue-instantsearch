@@ -1,7 +1,6 @@
-// const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
-// const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+// const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
+// const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const nodeExternals = require('webpack-node-externals');
-// const merge = require('lodash.merge')
 
 const isNodeTarget = process.env.WEBPACK_TARGET === 'node';
 
@@ -22,14 +21,12 @@ module.exports = {
       libraryTarget: isNodeTarget ? 'commonjs2' : undefined,
     },
   }),
-  // chainWebpack: config => {
-  //   config.module
-  //     .rule('vue')
-  //     .use('vue-loader')
-  //     .tap(options =>
-  //       merge(options, {
-  //         optimizeSSR: false,
-  //       })
-  //     );
-  // },
+  chainWebpack: config => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => {
+        options.optimizeSSR = isNodeTarget;
+      });
+  },
 };

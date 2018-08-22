@@ -14,8 +14,11 @@ server.use('/css', express.static(path.resolve(__dirname, './dist/css')));
 server.use('/img', express.static(path.resolve(__dirname, './dist/img')));
 
 server.get('*', (req, res) => {
+  const context = {};
+  const application = createApp(context);
+
   renderer
-    .renderToString(createApp())
+    .renderToString(application, context)
     .then(html => {
       res.end(html);
     })
