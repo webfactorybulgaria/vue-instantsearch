@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "node server.js",
+    "serve": "yarn build && yarn start",
+    "build": "yarn build:client && yarn build:server --no-clean",
     "build:client": "vue-cli-service build",
     "build:server": "WEBPACK_TARGET=node vue-cli-service build",
     "lint": "vue-cli-service lint"

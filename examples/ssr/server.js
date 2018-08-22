@@ -1,28 +1,30 @@
 const fs = require('fs');
-const path = require('path');
 const express = require('express');
-const { createRenderer } = require('vue-server-renderer');
-const createApp = require('./main').default;
+const { createBundleRenderer } = require('vue-server-renderer');
+const serverBundle = require('./dist/vue-ssr-server-bundle.json');
+const clientManifest = require('./dist/vue-ssr-client-manifest.json');
 
 const server = express();
-const renderer = createRenderer({
+const renderer = createBundleRenderer(serverBundle, {
+  runInNewContext: false,
   template: fs.readFileSync('./src/index.template.html', 'utf-8'),
+  clientManifest,
 });
 
-server.use('/js', express.static(path.resolve(__dirname, './dist/js')));
-server.use('/css', express.static(path.resolve(__dirname, './dist/css')));
-server.use('/img', express.static(path.resolve(__dirname, './dist/img')));
+server.use('/js', express.static('./dist/js'));
+server.use('/css', express.static('./dist/css'));
+server.use('/img', express.static('./dist/img'));
+server.use('/favicon', express.static('./dist/favicon.ico'));
 
 server.get('*', (req, res) => {
   const context = {};
-  const application = createApp(context);
 
   renderer
-    .renderToString(application, context)
+    .renderToString(context)
     .then(html => {
       res.end(html);
     })
-    .catch(err => {
+    .catch(() => {
       res.status(500).end('Internal Server Error');
     });
 });
