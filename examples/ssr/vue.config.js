@@ -29,8 +29,8 @@ module.exports = {
         options.optimizeSSR = isNodeTarget;
       });
 
-    config.plugins.delete('html');
-    config.plugins.delete('preload');
-    config.plugins.delete('prefetch');
+    // config.plugins.delete('html');
+    // config.plugins.delete('preload');
+    // config.plugins.delete('prefetch');
   },
 };
