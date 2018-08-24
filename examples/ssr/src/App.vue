@@ -2,7 +2,7 @@
   <div id="app">
     <section class="hero">
       <img alt="Vue logo" src="./assets/logo.png">
-      <HelloWorld :title="title" />
+      <HelloWorld title="Welcome to Your SSR Vue.js App" />
     </section>
     <index :instance="search">
       <configure :hitsPerPage="3" />
