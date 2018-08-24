@@ -10,6 +10,22 @@ export const createApp = () => {
   const application = new Vue({
     search,
     render: h => h(App),
+    asyncData({ search }) {
+      return search({
+        query: 'iphone',
+        page: 5,
+        hitsPerPage: 3,
+        hierarchicalFacets: [
+          {
+            name: 'brand',
+            attributes: ['brand'],
+          },
+        ],
+        hierarchicalFacetsRefinements: {
+          brand: ['Apple'],
+        },
+      });
+    },
   });
 
   return {
