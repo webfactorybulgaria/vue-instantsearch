@@ -23,7 +23,7 @@ export default {
     this.widget = this.factory(this.widgetParams);
 
     if (this.$isServer) {
-      this.instantSearchInstance.renderWidgetSSR(this.widget);
+      this.instantSearchInstance.renderWidget(this.widget);
     } else {
       this.instantSearchInstance.addWidget(this.widget);
     }
