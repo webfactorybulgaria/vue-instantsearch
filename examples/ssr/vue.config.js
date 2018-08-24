@@ -20,6 +20,9 @@ module.exports = {
     output: {
       libraryTarget: isNodeTarget ? 'commonjs2' : undefined,
     },
+    optimization: {
+      splitChunks: isNodeTarget ? false : undefined,
+    },
   }),
   chainWebpack: config => {
     config.module
