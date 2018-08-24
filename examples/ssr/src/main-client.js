@@ -1,11 +1,13 @@
 import { createApp } from './main';
+// import mock from './mock';
 
-const initialState = window.__INITIAL_STATE__ || {
-  title: 'Welcome to Your CSR Vue.js App',
-};
+const { search, application } = createApp();
 
-delete window.__INITIAL_STATE__;
+// Simulate INITIAL_STATE
+// window.__INITIAL_STATE__ = mock;
 
-const { application } = createApp(initialState);
+if (window.__INITIAL_STATE__) {
+  search.inject(window.__INITIAL_STATE__);
+}
 
 application.$mount('#app');

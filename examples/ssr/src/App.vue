@@ -4,11 +4,7 @@
       <img alt="Vue logo" src="./assets/logo.png">
       <HelloWorld :title="title" />
     </section>
-    <index
-      appId="latency"
-      apiKey="6be0576ff61c053d5f9a3225e2a90f76"
-      indexName="instant_search"
-    >
+    <index :instance="search">
       <configure :hitsPerPage="3" />
 
       <div class="container container-playground">
@@ -52,13 +48,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import { Index, Configure, Menu, SearchBox, Stats, Hits, Pagination } from 'vue-instantsearch';
 
 export default {
-  name: 'app',
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
+  name: 'App',
   components: {
     'ais-menu': Menu,
     HelloWorld,
@@ -68,6 +58,11 @@ export default {
     Stats,
     Hits,
     Pagination,
+  },
+  data() {
+    return {
+      search: this.$parent.$options.search,
+    };
   },
 };
 </script>
