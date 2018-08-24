@@ -16,21 +16,19 @@ server.use('/css', express.static('./dist/css'));
 server.use('/img', express.static('./dist/img'));
 server.use('/favicon', express.static('./dist/favicon.ico'));
 
-server.get('*', (req, res) => {
+server.get('*', async (req, res) => {
   const context = {};
 
   console.log('render: start');
 
-  renderer
-    .renderToString(context)
-    .then(html => {
-      console.log('render complete');
-      res.end(html);
-    })
-    .catch(error => {
-      console.log(error);
-      res.status(500).end('Internal Server Error');
-    });
+  try {
+    const content = await renderer.renderToString(context);
+    console.log('render complete');
+    res.end(content);
+  } catch (error) {
+    console.log(error);
+    res.status(500).end('Internal Server Error');
+  }
 });
 
 server.listen(8080, () => {
