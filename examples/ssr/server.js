@@ -19,12 +19,16 @@ server.use('/favicon', express.static('./dist/favicon.ico'));
 server.get('*', (req, res) => {
   const context = {};
 
+  console.log('render: start');
+
   renderer
     .renderToString(context)
     .then(html => {
+      console.log('render complete');
       res.end(html);
     })
-    .catch(() => {
+    .catch(error => {
+      console.log(error);
       res.status(500).end('Internal Server Error');
     });
 });
