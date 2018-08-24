@@ -12,6 +12,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "algoliasearch": "^3.30.0",
     "express": "^4.16.3",
     "vue": "^2.5.17",
     "vue-server-renderer": "^2.5.17"
