@@ -11,13 +11,16 @@ import suit from '../suit';
 
 export default {
   provide() {
-    this.instantSearchInstance = instantsearch({
-      appId: this.appId,
-      apiKey: this.apiKey,
-      indexName: this.indexName,
-      routing: this.routing,
-      stalledSearchDelay: this.stalledSearchDelay,
-    });
+    this.instantSearchInstance =
+      this.instance ||
+      instantsearch({
+        appId: this.appId,
+        apiKey: this.apiKey,
+        indexName: this.indexName,
+        routing: this.routing,
+        stalledSearchDelay: this.stalledSearchDelay,
+        searchClient: this.searchClient,
+      });
 
     return {
       instantSearchInstance: this.instantSearchInstance,
@@ -26,15 +29,18 @@ export default {
   props: {
     apiKey: {
       type: String,
-      required: true,
     },
     appId: {
       type: String,
-      required: true,
     },
     indexName: {
       type: String,
-      required: true,
+    },
+    searchClient: {
+      type: Object,
+    },
+    instance: {
+      type: Object,
     },
     routing: {
       type: [Boolean, Object],
@@ -51,9 +57,10 @@ export default {
     };
   },
   mounted() {
-    // from the documentation: https://vuejs.org/v2/api/#mounted
+    // From the documentation: https://vuejs.org/v2/api/#mounted
     // "Note that mounted does not guarantee that all child components have also been mounted. If you want to
-    // wait until the entire view has been rendered, you can use vm.$nextTick inside of mounted"
+    // wait until the entire view has been rendered, you can use vm.$nextTick inside of mounted" - Ensure that
+    // the update is triggered on widgets that are already mounted on the page.
     this.$nextTick(() => {
       this.instantSearchInstance.start();
     });
