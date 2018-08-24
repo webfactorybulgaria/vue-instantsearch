@@ -21,7 +21,12 @@ export default {
   created() {
     this.factory = this.connector(this.updateState, () => {});
     this.widget = this.factory(this.widgetParams);
-    this.instantSearchInstance.addWidget(this.widget);
+
+    if (this.$isServer) {
+      this.instantSearchInstance.renderWidgetSSR(this.widget);
+    } else {
+      this.instantSearchInstance.addWidget(this.widget);
+    }
   },
   beforeDestroy() {
     this.instantSearchInstance.removeWidget(this.widget);
