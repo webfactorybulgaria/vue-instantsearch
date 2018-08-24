@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <section class="hero">
       <img alt="Vue logo" src="./assets/logo.png">
       <HelloWorld :title="title" />
