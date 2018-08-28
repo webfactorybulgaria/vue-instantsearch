@@ -11,6 +11,7 @@ export const createApp = () => {
     search,
     render: h => h(App),
     asyncData({ search }) {
+      // - use the state
       return search({
         query: 'iphone',
         page: 5,

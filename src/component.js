@@ -19,6 +19,8 @@ export default {
     };
   },
   created() {
+    console.log('CREATED', this.widgetName);
+
     this.factory = this.connector(this.updateState, () => {});
     this.widget = this.factory(this.widgetParams);
 
@@ -27,6 +29,9 @@ export default {
     } else {
       this.instantSearchInstance.addWidget(this.widget);
     }
+  },
+  mounted() {
+    console.log('MOUNTED', this.widgetName);
   },
   beforeDestroy() {
     this.instantSearchInstance.removeWidget(this.widget);
@@ -47,6 +52,8 @@ export default {
       return suit(this.widgetName, ...args);
     },
     updateState(state = {}, isFirstRender) {
+      console.log('UPDATE', this.widgetName, isFirstRender);
+
       if (!isFirstRender) {
         // Avoid updating the state on first render
         // otherwise there will be a flash of placeholder data

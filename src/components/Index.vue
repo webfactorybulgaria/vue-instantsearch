@@ -56,7 +56,11 @@ export default {
       widgetName: 'Index',
     };
   },
+  created() {
+    console.log('CREATED', this.widgetName);
+  },
   mounted() {
+    console.log('MOUNTED', this.widgetName);
     // From the documentation: https://vuejs.org/v2/api/#mounted
     // "Note that mounted does not guarantee that all child components have also been mounted. If you want to
     // wait until the entire view has been rendered, you can use vm.$nextTick inside of mounted" - Ensure that
