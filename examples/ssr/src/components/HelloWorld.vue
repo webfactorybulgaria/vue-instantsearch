@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ title }}</h1>
-    <p>My first SSR App with Vue</p>
   </div>
 </template>
 
