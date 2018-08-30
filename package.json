@@ -35,7 +35,7 @@
     "test": "jest --coverage && yarn run lint",
     "test:update": "jest --updateSnapshot",
     "test:watch": "jest --watch",
-    "lint": "eslint --ext .js,.vue .",
+    "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue . --fix",
     "format": "prettier --write '**/*.{js,md,vue,css}'",
     "changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file",
