@@ -10,5 +10,6 @@ export const createInstantSearch = () => {
   return instantsearch({
     indexName: 'instant_search',
     searchClient,
+    routing: true,
   });
 };
