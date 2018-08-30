@@ -17,7 +17,11 @@ server.use('/img', express.static('./dist/img'));
 server.use('/favicon', express.static('./dist/favicon.ico'));
 
 server.get('*', async (req, res) => {
-  const context = {};
+  const context = {
+    protocol: req.protocol,
+    host: req.host,
+    url: req.url,
+  };
 
   console.log('render: start');
 

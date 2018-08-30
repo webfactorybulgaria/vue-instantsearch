@@ -3,8 +3,10 @@ import { createApp } from './main';
 const createAppWithContext = async context => {
   const { search, application } = createApp();
 
+  // Simulate the router - kinda
   await application.$options.asyncData({
-    search: (...args) => search.ssr(...args),
+    context,
+    search,
   });
 
   // Attach the state to the context to allow

@@ -1,4 +1,10 @@
 import Vue from 'vue';
+import { createInstantSearchState } from 'instantsearch.js/es/state/createInstantSearchState';
+import { configure } from 'instantsearch.js/es/state/configure';
+import { searchBox } from 'instantsearch.js/es/state/searchBox';
+import { hits } from 'instantsearch.js/es/state/hits';
+import { pagination } from 'instantsearch.js/es/state/pagination';
+import { menu } from 'instantsearch.js/es/state/menu';
 import { createInstantSearch } from './instantsearch';
 import App from './App.vue';
 
@@ -10,21 +16,31 @@ export const createApp = () => {
   const application = new Vue({
     search,
     render: h => h(App),
-    asyncData({ search }) {
-      return search({
-        query: 'iphone',
-        page: 5,
-        hitsPerPage: 3,
-        hierarchicalFacets: [
-          {
-            name: 'brand',
-            attributes: ['brand'],
+    asyncData({ context, search }) {
+      const state = createInstantSearchState(
+        context,
+        configure({
+          params: {
+            searchParameters: {
+              hitsPerPage: 3,
+            },
           },
-        ],
-        hierarchicalFacetsRefinements: {
-          brand: ['Apple'],
-        },
-      });
+        }),
+        menu({
+          params: {
+            attributeName: 'brand',
+          },
+        }),
+        searchBox(),
+        hits({
+          params: {
+            escapeHits: true,
+          },
+        }),
+        pagination()
+      );
+
+      return search.ssr(state);
     },
   });
 
