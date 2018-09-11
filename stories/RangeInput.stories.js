@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { previewWrapper } from './utils';
+import VueSlider from 'vue-slider-component';
 
 storiesOf('RangeInput', module)
   .addDecorator(previewWrapper())
@@ -72,4 +73,27 @@ storiesOf('RangeInput', module)
         <template slot="footer">Footer</template>
       </ais-panel>
     `,
+  }))
+  .add('using vue-slider-component', () => ({
+    template: `
+      <ais-range-input attribute="price">
+        <template
+          slot-scope="{
+            refine,
+            currentRefinements,
+            range: { min, max },
+          }"
+        >
+          <vue-slider
+            @input="refine($event)"
+            :value="currentRefinements"
+            :min="min"
+            :max="max"
+          />
+        </template>
+      </ais-range-input>
+    `,
+    components: {
+      VueSlider,
+    },
   }));
